@@ -10,7 +10,8 @@ function ConfigCache(config) {
 
         var configuration = configCache.get(config);
         if (!configuration || configuration == undefined) {
-            config = atob(config)
+            config = Buffer.from(config, 'base64').toString('ascii');
+            console.log(config);
             var [providors, costume] = config.split('|');
             var costumeLists = {};
             providors = providors.split('=');
@@ -182,7 +183,7 @@ async function stream(id, url) {
 
     let stream = {
         name: iptv.name,
-        description: "IPTV by dexter21767",
+        description: "IPTV",
         url: iptv.url
     };
     if (iptv["behaviorHints"]) {

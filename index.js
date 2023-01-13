@@ -43,7 +43,7 @@ app.get('/manifest.json', (_, res) => {
 app.get('/:configuration/manifest.json', (req, res) => {
 	//let manifesto = manifest;
 	manifest.catalogs = [];
-	configuration = atob(req.params.configuration)
+	configuration = Buffer.from(req.params.configuration, 'base64').toString('ascii');
 	let { providors, costume, costumeLists } = iptv.ConfigCache(req.params.configuration)
 	if (costume) {
 		for (let i = 0; i < costume.length; i++) {
